@@ -1,5 +1,6 @@
 '''
   This is an example code for factory method pattern.
+  Creating a factory that could build duck mold and car mold and then injecting the toy mold to finish the create process.
 '''
 
 
@@ -10,25 +11,26 @@ class InjectionMold:
 
 
 class duck(InjectionMold):
+    # build duck mold
     def __init__(self, name):
         self.name = name
         self.color = 'Yellow'
         print('{} {} mold is building.'.format(self.color, self.name))
 
     def injecting(self):
-        # build duck mold
         print('{} {} is injecting...'.format(self.color, self.name))
         return self.inject()
 
 
 class car(InjectionMold):
+    # build car mold
     def __init__(self, name):
         self.name = name
         self.size = 'Small'
         print('{} {} mold is building.'.format(self.size, self.name))
 
     def injecting(self):
-        # build car mold
+
         print('{} {} is injecting...'.format(self.size, self.name))
         return self.inject()
 
