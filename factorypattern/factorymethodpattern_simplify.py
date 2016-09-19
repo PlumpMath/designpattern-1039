@@ -30,19 +30,20 @@ class car(InjectionMold):
         print('{} {} mold is building.'.format(self.size, self.name))
 
     def injecting(self):
-
         print('{} {} is injecting...'.format(self.size, self.name))
         return self.inject()
 
 
 def create(toy_type):
     # create request for building
-    toy = eval(toy_type)(toy_type)
-    toy.injecting()
+    # factory method
+    try:
+        toy = eval(toy_type)(toy_type)
+        toy.injecting()
+    except:
+        print("Toy type error!")
+
 
 if __name__ == '__main__':
     toy_type = raw_input("Which Toy you'd like to create? [duck or car]")
-    try:
-        create(toy_type)
-    except:
-        print("Toy type error!")
+    create(toy_type)
