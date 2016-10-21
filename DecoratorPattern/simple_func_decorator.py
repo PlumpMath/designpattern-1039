@@ -14,6 +14,7 @@ def process1():
 @deco
 def process2():
     print("This is processs2.")
+
 if __name__ == '__main__':
     process1()
     process2()
