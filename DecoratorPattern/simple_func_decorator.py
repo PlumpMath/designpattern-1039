@@ -7,7 +7,8 @@ def deco(func):
         print("-------Start-------")
         func()
         print("-------Done-------")
-    return _deco
+		return 0
+    return _deco()
 @deco
 def process1():
     print("This is processs1.")
