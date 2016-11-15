@@ -72,5 +72,5 @@ if __name__ == "__main__":
     publisher1.publisher(message1)
     print("-----Remove Observer1 From the Inform List-----")
     publisher1.remove(observer1)
-    message2 = observer1.name + " is not on the inform list."
+    message2 = "%s is not on the inform list." % observer1.name
     publisher1.publisher(message2)
