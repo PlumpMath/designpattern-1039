@@ -3,36 +3,45 @@
 
 """
   Example code for observer pattern.
+  Teacher publishes notices and students receive them.
 """
 
 
 class publisher():
-    """Abstract observer"""
+    """ Abstract publisher """
+    """ Could add, remove, and inform the followers. """
     def __init__(self):
         self.followers = []
         self.state = ' '
 
-    def add(self, concrete_follower):
-        self.followers.append(concrete_follower)
+    def add(self, *args):
+        for concrete_follower in args:
+            self.followers.append(concrete_follower)
 
-    def remove(self, concrete_follower):
-        self.followers.remove(concrete_follower)
+    def remove(self, *args):
+        for concrete_follower in args:
+            self.followers.remove(concrete_follower)
 
-    def __inform(self):
+    def publisher(self, *args):
+        pass
+
+    def inform(self):
         for person in self.followers:
             person.notify()
 
-    def __state_changed(self):
-        print("Notice: %s" % self.state)
-        self.__inform()
 
-    def publish(self, concrete_publish):
+class teacher(publisher):
+    """ Concrete publisher """
+    """ Have their own publisher style. """
+    def publisher(self, concrete_publish):
         self.state = concrete_publish
-        self.__state_changed()
+        print(self.state)
+        self.inform()
 
 
 class observer():
-    """Observer"""
+    """ Abstract observer """
+    """ Could receive notice. """
     def __init__(self, name):
         self.name = name
 
@@ -41,19 +50,27 @@ class observer():
 
 
 class active_student(observer):
+    """ One type of student, concrete observer. """
     def notify(self):
         print("%s: I have get your message, thank you." % self.name)
 
 
 class inactive_student(observer):
+    """ Concrete observer """
     def notify(self):
         print("%s: Oh, I see." % self.name)
 
 if __name__ == "__main__":
-    publisher1 = publisher()
+    """ init """
+    publisher1 = teacher()
     observer1 = active_student('Tom')
     observer2 = inactive_student('Jerry')
-    publisher1.add(observer1)
-    publisher1.add(observer2)
-    message = "We will have an exam next class."
-    publisher1.publish(message)
+    publisher1.add(observer1, observer2)
+
+    """ publish notices """
+    message1 = "We will have an exam next class."
+    publisher1.publisher(message1)
+    print("-----Remove Observer1 From the Inform List-----")
+    publisher1.remove(observer1)
+    message2 = observer1.name + " is not on the inform list."
+    publisher1.publisher(message2)
